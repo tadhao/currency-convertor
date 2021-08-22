@@ -2,21 +2,11 @@ import './App.css';
 import { Card, Form, Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import { useState } from 'react';
+import DisplayScreen from './DisplayScreen'
 
 function App() {
-
   const [amount, setAmount] = useState("0")
-  const [convertedAmount, setConvertedAmount] = useState("0")
-  
-  const currencyCoverter = (currency) => {
-    if(currency === 'USD') {
-      let conValue = (parseInt(amount) * 0.013).toFixed(2) 
-      setConvertedAmount("$"+ conValue)
-    } else if(currency === 'GBP') {
-      let conValue = (parseInt(amount) * 0.012).toFixed(2)
-      setConvertedAmount("€" + conValue)
-    }
-  }
+  const [amountType, setAmountType] = useState('0')
   return (
     <div className="App">
       <div className="row">
@@ -34,11 +24,11 @@ function App() {
           </Form>
         </Card>
         <div className="m-3">
-          <Button onClick={()=> currencyCoverter('USD')} variant="primary">Dollar</Button>{' '}
-          <Button onClick={()=> currencyCoverter('GBP')} variant="primary">Pounds</Button>
+          <Button onClick={()=> setAmountType('USD')} variant="primary">Dollar</Button>{' '}
+          <Button onClick={()=> setAmountType('GBP')} variant="primary">Pounds</Button>
         </div>
         <Card className="px-4 py-1 mx-4">
-          <h2>{convertedAmount}</h2>
+          <DisplayScreen amount={amount} amountType={amountType} setAmountType={setAmountType}/>
         </Card>
       </div>
       </div>
